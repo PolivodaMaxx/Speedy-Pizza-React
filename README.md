@@ -7,4 +7,4 @@ Using technologies such as:
 👉 Axios
 👉 SCSS
 👉 Skeleton
-👉 Lodash.Debounce
+👉 Lodash Debounce
