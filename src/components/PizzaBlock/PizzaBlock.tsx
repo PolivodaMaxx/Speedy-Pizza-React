@@ -5,19 +5,35 @@ import { selectCartItemById } from '../../redux/cart/selectors';
 import { addItem } from '../../redux/cart/slice';
 import { CartItemType } from '../../redux/cart/types';
 
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Clear';
+import EditIcon from '@mui/icons-material/Edit';
+import { fetchRemovePizza } from '../../redux/pizza/asyncActions';
+import { useAppDispatch } from '../../redux/store';
+
 const typeNames = ['тонкое', 'традиционное'];
 
 type PizzaBlockProps = {
-  id: string, 
-  name: string,
-  price: number,
-  imageUrl: string,
-  sizes: number[],  
-  types: number[]
-}
+  id: string;
+  name: string;
+  price: number;
+  imageUrl: string;
+  sizes: number[];
+  types: number[];
+  isEditable: boolean;
+};
 
-const PizzaBlock: React.FC<PizzaBlockProps> = ({ id, name, price, imageUrl, sizes, types }) => {
-  const dispatch = useDispatch();
+const PizzaBlock: React.FC<PizzaBlockProps> = ({
+  id,
+  name,
+  price,
+  imageUrl,
+  sizes,
+  types,
+  isEditable,
+}) => {
+  const dispatch = useAppDispatch();
+
   const cartItem = useSelector(selectCartItemById(id));
   const [activeType, setActiveType] = React.useState(0);
   const [activeSize, setActiveSize] = React.useState(0);
@@ -36,12 +52,30 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({ id, name, price, imageUrl, size
     dispatch(addItem(item));
   };
 
+  const onClickRemove = () => {
+    if (window.confirm('Вы действительно хотите удалить данный товар?')) {
+      dispatch(fetchRemovePizza(id));
+    }
+  };
+
   return (
     <div className="pizza-block-wrapper">
       <div className="pizza-block">
+        {isEditable && (
+          <div className="pizza-block__edit-buttons">
+            <Link to={`/pizzas/${id}/edit`}>
+              <IconButton color="primary">
+                <EditIcon />
+              </IconButton>
+            </Link>
+            <IconButton onClick={onClickRemove} color="secondary">
+              <DeleteIcon />
+            </IconButton>
+          </div>
+        )}
         <Link key={id} to={`/pizza/${id}`}>
-        <img className="pizza-block__image" src={imageUrl} alt={name} />
-        <h4 className="pizza-block__title">{name}</h4>
+          <img className="pizza-block__image" src={imageUrl} alt={name} />
+          <h4 className="pizza-block__title">{name}</h4>
         </Link>
         <div className="pizza-block__selector">
           <ul>
@@ -92,6 +126,6 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({ id, name, price, imageUrl, size
       </div>
     </div>
   );
-}
+};
 
 export default PizzaBlock;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../axios';
 import { useParams, useNavigate } from 'react-router-dom';
 
 const FullPizza: React.FC = () => {
@@ -15,9 +15,7 @@ const FullPizza: React.FC = () => {
   React.useEffect(() => {
     async function fetchPizza() {
       try {
-        const { data } = await axios.get(
-          'https://62aca07e402135c7acb5c16b.mockapi.io/items/' + id,
-        );
+        const { data } = await axios.get('/pizzas/' + id);
         setPizza(data);
       } catch (error) {
         alert('Ошибка при получении пиццы');
@@ -33,7 +31,7 @@ const FullPizza: React.FC = () => {
 
   return (
     <div className="container">
-      <img src={pizza.imageUrl} alt="Full Pizza" />
+      <img src={pizza.imageUrl} alt="Full Pizza" width="400px" height="400px" />
       <h2>{pizza.name}</h2>
       <h4>{pizza.price} ₽</h4>
       <Link to="/">

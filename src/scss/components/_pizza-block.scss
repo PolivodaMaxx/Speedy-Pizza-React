@@ -5,6 +5,15 @@
   text-align: center;
   margin-bottom: 65px;
 
+  &:hover {
+    // border: 0.5px solid #ea592a;
+    // box-shadow: 0 0 0 1px #ea592a;
+
+    .pizza-block__edit-buttons {
+      opacity: 1;
+    }
+  }
+
   &-wrapper {
     display: flex;
     justify-content: center;
@@ -12,6 +21,17 @@
 
   &__image {
     width: 230px;
+  }
+
+  &__edit-buttons {
+    position: relative;
+    right: -185px;
+    top: 8px;
+    width: 84px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    opacity: 0;
+    transition: all 0.15s ease-in-out;
   }
 
   &__title {
@@ -57,7 +77,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 20px;
+    margin-top: 10px;
   }
 
   &__price {

@@ -4,6 +4,8 @@ import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import MainLayout from './layouts/MainLayout';
 import './scss/app.scss';
+import AddPizza from './pages/AddPizza';
+import AboutInfo from './pages/AboutInfo';
 
 const Cart = lazy(() => import(/* webpackChunkName: 'Cart' */ './pages/Cart'));
 const FullPizza = lazy(
@@ -34,6 +36,10 @@ function App() {
             </Suspense>
           }
         />
+        <Route path="/pizzas/:id/edit" element={<AddPizza />} />
+        <Route path="/add-pizza" element={<AddPizza />} />
+        <Route path="/about" element={<AboutInfo />} />
+        <Route path="admin" element={<Home />} />
         <Route
           path="*"
           element={

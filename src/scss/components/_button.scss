@@ -8,7 +8,8 @@
   min-width: 100px;
   text-align: center;
   cursor: pointer;
-  transition: background-color $duration ease-in-out, border-color $duration ease-in-out;
+  transition: background-color $duration ease-in-out,
+    border-color $duration ease-in-out;
   border: 1px solid transparent;
   @include noselect();
 
@@ -56,6 +57,7 @@
   &--outline {
     background-color: #fff;
     border-color: $orange;
+    margin-top: 5px;
     &,
     span {
       color: $orange;
@@ -146,11 +148,11 @@
     }
 
     @media (max-width: 910px) {
-      &__span{
-        display:none;
+      &__span {
+        display: none;
       }
-      &__delimiter{
-        display:none;
+      &__delimiter {
+        display: none;
       }
     }
   }
